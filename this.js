@@ -119,3 +119,26 @@ var bar = new foo( 2 );
 console.log( bar.a ); // 2
 // By calling foo(..) with new in front of it, we've constructed a 
 // new object and set that new object as the this for the call of foo(..). 
+
+
+//arrow function
+
+// The short explanation is that arrow-functions do not behave at all like normal 
+// functions when it comes to their this binding. They discard all the normal rules 
+// for this binding, and instead take on the this value of their immediate lexical 
+// enclosing scope, whatever it is.
+
+
+var obj = {
+	count: 0,
+	cool: function coolFn() {
+		if (this.count < 1) {
+			setTimeout( () => { // arrow-function - binds this to its immediate lexcical scope
+				this.count++;
+				console.log( "awesome?" );
+			}, 100 );
+		}
+	}
+};
+
+obj.cool(); // awesome?
